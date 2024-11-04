@@ -32,7 +32,7 @@ int main() {
     displayWelcomeMessage();
     int option;
 
-12312
+12312123123
     do {
         displayMainMenu();
         cin >> option;
