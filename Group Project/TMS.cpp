@@ -5,6 +5,9 @@
 
 using namespace std;
 
+vector<User> users;
+bool isdataLoaded = false;
+
 struct UserRecord {
     int userID;
     char type;
@@ -31,7 +34,22 @@ void displayWelcomeMessage() {
 void displayInvalidMessage() {
     cout << "Invalid option. Please choose a valid option.\n";
 }
-
+void loadStartingData() {
+users = {
+        {"SkyWalker", 'T', 20, 'N'},
+        {"Ocean123", 'T', 35, 'N'},
+        {"Forest99", 'T', 6, 'Y'},
+        {"Valley777", 'F', 10, 'Y'},
+        {"Desert2022", 'F', 25, 'N'},
+        {"River456", 'F', 20, 'Y'},
+        {"Blaze2003", 'F', 100, 'N'},
+        {"Meadow888", 'S', 40, 'Y'},
+        {"Galaxy", 'S', 15, 'Y'},
+        {"Storm2024", 'S', 30, 'N'}
+    };
+    isdataLoaded = true; 
+    cout << "Starting data loaded successfully!\n";
+}
 void CreditsAndExit() {
 
 }
@@ -45,7 +63,7 @@ int main() {
         cin >> option;
 
         switch (option) {
-        case 1:
+        case 1: loadStartingData();
         case 2:
         case 3:
         case 4:
