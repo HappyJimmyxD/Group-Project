@@ -50,7 +50,7 @@ void loadStartingData(vector<User>& users) {
         {"Galaxy", 'S', 15, 'N'},
         {"Storm2024", 'S', 30, 'N'}
     };
-    std::cout << "Starting data loaded successfully.\n";
+    cout << "Starting data loaded successfully.\n";
 }
 // R2
 void showUserRecords() {
