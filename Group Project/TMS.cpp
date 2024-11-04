@@ -8,7 +8,7 @@ using namespace std;
 vector<User> users;
 bool isdataLoaded = false;
 
-struct UserRecord {
+struct User {
     int userID;
     char type;
     int tokenBalance;
