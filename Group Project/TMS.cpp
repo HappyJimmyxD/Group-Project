@@ -2,10 +2,10 @@
 #include <iomanip>
 #include <vector>
 #include <algorithm>
+#include <string>
 
 using namespace std;
 
-vector<User> users;
 bool isDataLoaded = false;
 
 struct User {
@@ -36,7 +36,7 @@ void displayInvalidMessage() {
 }
 
 // R1
-void loadStartingData() {
+void loadStartingData(vector<User>& users) {
 users = {
         {"SkyWalker", 'T', 20, 'N'},
         {"Ocean123", 'T', 35, 'N'},
