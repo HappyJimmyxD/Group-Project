@@ -5,6 +5,13 @@
 
 using namespace std;
 
+struct UserRecord {
+    int userID;
+    char type;
+    int tokenBalance;
+    char tokenBalanceStatus;
+};
+
 void displayMainMenu() {
     cout << "\n*** Main Menu ***\n";
     cout << "[1] Load Starting Data\n";
