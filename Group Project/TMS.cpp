@@ -6,7 +6,7 @@
 using namespace std;
 
 vector<User> users;
-bool isdataLoaded = false;
+bool isDataLoaded = false;
 
 struct User {
     int userID;
@@ -49,12 +49,21 @@ users = {
         {"Galaxy", 'S', 15, 'Y'},
         {"Storm2024", 'S', 30, 'N'}
     };
-    isdataLoaded = true; 
+    isDataLoaded = true; 
     cout << "Starting data loaded successfully!\n";
 }
 // R2
 void showUserRecords() {
+    if(!isDataLoaded) {
+        cout << " Error! Please load the data first!\n";
+        return;
+    }
+    sort(users.begin(), users.end(), [](User a, User b) { return a.userID < b.userID; });
+    cout << "User Records: \n";
     
+    cout << "ID: " << user.userID << ", Type: " << user.type 
+    << ", Token Balance: " << user.tokenBalance 
+    << ", Auto Top-Up: " << user.autoTopUp << "\n";
 }
 // R3
 void editUser() {
