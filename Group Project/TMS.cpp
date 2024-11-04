@@ -1,31 +1,33 @@
 #include <iostream>
-#include <iomanip>
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <iomanip>
 
 using namespace std;
 
-vector<User> users;
-bool isDataLoaded = false;
-
 struct User {
-    int userID;
-    char type;
-    int tokenBalance;
-    char tokenBalanceStatus;
+    string userID;       
+    char type{};
+    int tokenBalance{};
+    char autoTopUp{};
 };
+
+
+vector<User> users;      
+bool isDataLoaded = false; 
+
 
 void displayMainMenu();
 void displayWelcomeMessage();
 void displayInvalidMessage();
 void loadStartingData();
 void showUserRecords();
-void editUser();
+void editUsers();
 void enterUserView();
 void showSystemUsageSummary();
 void CreditsAndExit();
-void displayInvalidMessage();
+
 
 int main() {
     displayWelcomeMessage();
@@ -36,12 +38,12 @@ int main() {
         cin >> option;
 
         switch (option) {
-        case 1: loadStartingData();
-        case 2: showUserRecords();
-        case 3: editUser();
-        case 4: enterUserView();
-        case 5: showSystemUsageSummary();
-        case 6: CreditsAndExit();
+        case 1: loadStartingData(); break;
+        case 2: showUserRecords(); break;
+        case 3: editUsers(); break;
+        case 4: enterUserView(); break;
+        case 5: showSystemUsageSummary(); break;
+        case 6: CreditsAndExit(); return 0;
         default: displayInvalidMessage();
         }
     } while (option != 6);
@@ -66,7 +68,6 @@ void displayWelcomeMessage() {
 void displayInvalidMessage() {
     cout << "Invalid option. Please choose a valid option.\n";
 }
-
 // R1
 void loadStartingData() {
     users = {
@@ -87,29 +88,81 @@ void loadStartingData() {
 // R2
 void showUserRecords() {
     if (!isDataLoaded) {
-        cout << " Error! Please load the data first!\n";
+        cout << "Error: Please Load the data first!\n"; 
         return;
     }
-    sort(users.begin(), users.end(), [](User a, User b) { return a.userID < b.userID; });
-    cout << "User Records: \n";
+    sort(users.begin(), users.end(), [](User a, User b) { return a.userID < b.userID; }); 
+    cout << "User Records:\n";
 
-    cout << "ID: " << user.userID << ", Type: " << user.type
-        << ", Token Balance: " << user.tokenBalance
-        << ", Auto Top-Up: " << user.autoTopUp << "\n";
+    cout << setw(15) << "ID"
+         << setw(20) << "Type"
+         << setw(25) << "Token Balance"
+         << setw(20) << "Auto Top-Up\n";
+    cout << string(85, '-') << "\n"; 
+    for (const auto& user : users) {
+        cout << setw(18) << user.userID
+            << setw(15) << user.type
+            << setw(22) << user.tokenBalance
+            << setw(20) << user.autoTopUp << "\n";
+    }
 }
 // R3
-void editUser() {
+void editUsers() {
+    if (!isDataLoaded) {
+        cout << "Error: Load data first.\n";
+        return;
+    }
+    string userID;
+    cout << "Enter User ID to edit: ";
+    cin >> userID;
+    auto it = find_if(users.begin(), users.end(), [&](User& u) { return u.userID == userID; });
+    if (it == users.end()) {
+
+        cout << "User not found. Adding new user.\n";
+        User newUser;
+        newUser.userID = userID;
+
+
+        cout << "Enter Type (T/F/S): ";
+        cin >> newUser.type;
+        while (newUser.type != 'T' && newUser.type != 'F' && newUser.type != 'S') {
+            cout << "Invalid type. Enter Type (T/F/S): ";
+            cin >> newUser.type;
+        }
+
+        cout << "Enter Token Balance: ";
+        cin >> newUser.tokenBalance;
+        while (newUser.tokenBalance < 0) {
+            cout << "Invalid balance. Enter Token Balance: ";
+            cin >> newUser.tokenBalance;
+        }
+
+        cout << "Enter Auto Top-Up (Y/N): ";
+        cin >> newUser.autoTopUp;
+        while (newUser.autoTopUp != 'Y' && newUser.autoTopUp != 'N') {
+            cout << "Invalid input. Enter Auto Top-Up (Y/N): ";
+            cin >> newUser.autoTopUp;
+        }
+
+        users.push_back(newUser); 
+        cout << "User added successfully.\n";
+    }
+    else {
+        cout << "User found. Deleting user.\n";
+        users.erase(it); 
+        cout << "User deleted successfully.\n";
+    }
 
 }
 // R4
-void enterUserView() {
+void enterUserView(){
 
 }
 // R5
-void showSystemUsageSummary() {
+void showSystemUsageSummary(){
 
 }
 // R6
-void CreditsAndExit() {
+void CreditsAndExit(){
 
 }
