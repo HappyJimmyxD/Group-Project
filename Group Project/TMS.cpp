@@ -6,6 +6,7 @@
 
 using namespace std;
 
+vector<User> users;
 bool isDataLoaded = false;
 
 struct User {
@@ -14,6 +15,37 @@ struct User {
     int tokenBalance;
     char tokenBalanceStatus;
 };
+
+void displayMainMenu();
+void displayWelcomeMessage();
+void displayInvalidMessage();
+void loadStartingData();
+void showUserRecords();
+void editUser();
+void enterUserView();
+void showSystemUsageSummary();
+void CreditsAndExit();
+void displayInvalidMessage();
+
+int main() {
+    displayWelcomeMessage();
+    int option;
+
+    do {
+        displayMainMenu();
+        cin >> option;
+
+        switch (option) {
+        case 1: loadStartingData();
+        case 2: showUserRecords();
+        case 3: editUser();
+        case 4: enterUserView();
+        case 5: showSystemUsageSummary();
+        case 6: CreditsAndExit();
+        default: displayInvalidMessage();
+        }
+    } while (option != 6);
+}
 
 void displayMainMenu() {
     cout << "\n*** Main Menu ***\n";
@@ -37,32 +69,33 @@ void displayInvalidMessage() {
 
 // R1
 void loadStartingData() {
-users = {
+    users = {
         {"SkyWalker", 'T', 20, 'N'},
         {"Ocean123", 'T', 35, 'N'},
         {"Forest99", 'T', 6, 'Y'},
         {"Valley777", 'F', 10, 'Y'},
         {"Desert2022", 'F', 25, 'N'},
         {"River456", 'F', 20, 'Y'},
-        {"Blaze2023", 'F', 100, 'N'},
+        {"Blaze2003", 'F', 100, 'N'},
         {"Meadow888", 'S', 40, 'Y'},
-        {"Galaxy", 'S', 15, 'N'},
+        {"Galaxy", 'S', 15, 'Y'},
         {"Storm2024", 'S', 30, 'N'}
     };
+    isDataLoaded = true; 
     cout << "Starting data loaded successfully.\n";
 }
 // R2
 void showUserRecords() {
-    if(!isDataLoaded) {
+    if (!isDataLoaded) {
         cout << " Error! Please load the data first!\n";
         return;
     }
     sort(users.begin(), users.end(), [](User a, User b) { return a.userID < b.userID; });
     cout << "User Records: \n";
-    
-    cout << "ID: " << user.userID << ", Type: " << user.type 
-    << ", Token Balance: " << user.tokenBalance 
-    << ", Auto Top-Up: " << user.autoTopUp << "\n";
+
+    cout << "ID: " << user.userID << ", Type: " << user.type
+        << ", Token Balance: " << user.tokenBalance
+        << ", Auto Top-Up: " << user.autoTopUp << "\n";
 }
 // R3
 void editUser() {
@@ -70,7 +103,7 @@ void editUser() {
 }
 // R4
 void enterUserView() {
-    
+
 }
 // R5
 void showSystemUsageSummary() {
@@ -79,24 +112,4 @@ void showSystemUsageSummary() {
 // R6
 void CreditsAndExit() {
 
-}
-
-int main() {
-    displayWelcomeMessage();
-    int option;
-
-    do {
-        displayMainMenu();
-        cin >> option;
-
-        switch (option) {
-        case 1: loadStartingData();
-        case 2: showUserRecords();
-        case 3: editUser();
-        case 4: enterUserView();
-        case 5: showSystemUsageSummary();
-        case 6: CreditsAndExit();
-        default: displayInvalidMessage();
-        }
-    } while (option != 6);
 }
