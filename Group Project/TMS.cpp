@@ -50,6 +50,9 @@ users = {
     isdataLoaded = true; 
     cout << "Starting data loaded successfully!\n";
 }
+void showUserRecords();
+editUser();
+enterUserView();
 void CreditsAndExit() {
 
 }
@@ -64,10 +67,10 @@ int main() {
 
         switch (option) {
         case 1: loadStartingData();
-        case 2:
-        case 3:
-        case 4:
-        case 5:
+        case 2: showUserRecords();
+        case 3: editUser();
+        case 4: enterUserView();
+        case 5: showSystemUsageSummary();
         case 6: CreditsAndExit();
         default: displayInvalidMessage();
         }
