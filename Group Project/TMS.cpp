@@ -36,7 +36,7 @@ void displayInvalidMessage() {
 }
 
 // R1
-void loadStartingData(vector<User>& users) {
+void loadStartingData() {
 users = {
         {"SkyWalker", 'T', 20, 'N'},
         {"Ocean123", 'T', 35, 'N'},
@@ -44,13 +44,12 @@ users = {
         {"Valley777", 'F', 10, 'Y'},
         {"Desert2022", 'F', 25, 'N'},
         {"River456", 'F', 20, 'Y'},
-        {"Blaze2003", 'F', 100, 'N'},
+        {"Blaze2023", 'F', 100, 'N'},
         {"Meadow888", 'S', 40, 'Y'},
-        {"Galaxy", 'S', 15, 'Y'},
+        {"Galaxy", 'S', 15, 'N'},
         {"Storm2024", 'S', 30, 'N'}
     };
-    isDataLoaded = true; 
-    cout << "Starting data loaded successfully!\n";
+    cout << "Starting data loaded successfully.\n";
 }
 // R2
 void showUserRecords() {
