@@ -34,6 +34,8 @@ void displayWelcomeMessage() {
 void displayInvalidMessage() {
     cout << "Invalid option. Please choose a valid option.\n";
 }
+
+// R1
 void loadStartingData() {
 users = {
         {"SkyWalker", 'T', 20, 'N'},
@@ -50,9 +52,23 @@ users = {
     isdataLoaded = true; 
     cout << "Starting data loaded successfully!\n";
 }
-void showUserRecords();
-editUser();
-enterUserView();
+// R2
+void showUserRecords() {
+    
+}
+// R3
+void editUser() {
+
+}
+// R4
+void enterUserView() {
+    
+}
+// R5
+void showSystemUsageSummary() {
+
+}
+// R6
 void CreditsAndExit() {
 
 }
