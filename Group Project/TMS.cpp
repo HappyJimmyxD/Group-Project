@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
-#include <cmath>
+#include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -32,7 +33,6 @@ int main() {
     displayWelcomeMessage();
     int option;
 
-12312123123
     do {
         displayMainMenu();
         cin >> option;
