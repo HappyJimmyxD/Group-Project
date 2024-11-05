@@ -109,7 +109,7 @@ void showUserRecords() {
 // R3
 void editUsers() {
     if (!isDataLoaded) {
-        cout << "Error: Load data first.\n";
+        cout << "Error: Please Load the data first!\n"; 
         return;
     }
     string userID;
