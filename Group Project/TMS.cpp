@@ -122,35 +122,82 @@ void editUsers() {
         User newUser;
         newUser.userID = userID;
 
+        int attempts = 0;
+        const int maxAttempts = 3;
 
-        cout << "Enter Type (T/F/S): ";
-        cin >> newUser.type;
-        while (newUser.type != 'T' && newUser.type != 'F' && newUser.type != 'S') {
-            cout << "Invalid type. Enter Type (T/F/S): ";
+
+        do {
+            cout << "Enter Type (T/F/S): ";
             cin >> newUser.type;
+            if (newUser.type == 'T' || newUser.type == 'F' || newUser.type == 'S') {
+                break;
+            }
+            cout << "Invalid type. ";
+            attempts++;
+        } while (attempts < maxAttempts);
+
+        if (attempts >= maxAttempts) {
+            cout << "Too many invalid attempts. Returning to Main Menu.\n";
+            return;
         }
 
-        cout << "Enter Token Balance: ";
-        cin >> newUser.tokenBalance;
-        while (newUser.tokenBalance < 0) {
-            cout << "Invalid balance. Enter Token Balance: ";
+        attempts = 0;
+
+
+        do {
+            cout << "Enter Token Balance: ";
             cin >> newUser.tokenBalance;
+            if (newUser.tokenBalance >= 0) {
+                break;
+            }
+            cout << "Invalid balance. ";
+            attempts++;
+        } while (attempts < maxAttempts);
+
+        if (attempts >= maxAttempts) {
+            cout << "Too many invalid attempts. Returning to Main Menu.\n";
+            return;
         }
 
-        cout << "Enter Auto Top-Up (Y/N): ";
-        cin >> newUser.autoTopUp;
-        while (newUser.autoTopUp != 'Y' && newUser.autoTopUp != 'N') {
-            cout << "Invalid input. Enter Auto Top-Up (Y/N): ";
+        attempts = 0;
+
+        do {
+            cout << "Enter Auto Top-Up (Y/N): ";
             cin >> newUser.autoTopUp;
+            if (newUser.autoTopUp == 'Y' || newUser.autoTopUp == 'N') {
+                break;
+            }
+            cout << "Invalid input. ";
+            attempts++;
+        } while (attempts < maxAttempts);
+
+        if (attempts >= maxAttempts) {
+            cout << "Too many invalid attempts. Returning to Main Menu.\n";
+            return;
         }
 
         users.push_back(newUser); 
         cout << "User added successfully.\n";
     }
     else {
-        cout << "User found. Deleting user.\n";
-        users.erase(it); 
-        cout << "User deleted successfully.\n";
+
+        cout << "User found:\n";
+        cout << "UserID: " << it->userID << "\n";
+        cout << "Type: " << it->type << "\n";
+        cout << "Token Balance: " << it->tokenBalance << "\n";
+        cout << "Auto Top-Up: " << it->autoTopUp << "\n";
+
+        char confirmation;
+
+        cout << "Do you want to delete this user? (Y/N): ";
+        cin >> confirmation;
+        if (confirmation == 'Y' || confirmation == 'y') {
+            users.erase(it);
+            cout << "User deleted successfully.\n";
+        }
+        else {
+            cout << "User deletion cancelled.\n";
+        }
     }
 
 }
