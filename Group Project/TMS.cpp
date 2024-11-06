@@ -101,9 +101,9 @@ void showUserRecords() {
     cout << string(85, '-') << "\n"; 
     for (const auto& user : users) {
         cout << setw(18) << user.userID
-            << setw(15) << user.type
-            << setw(22) << user.tokenBalance
-            << setw(20) << user.autoTopUp << "\n";
+             << setw(15) << user.type
+             << setw(22) << user.tokenBalance
+             << setw(20) << user.autoTopUp << "\n";
     }
 }
 // R3
