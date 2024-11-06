@@ -68,6 +68,50 @@ void displayWelcomeMessage() {
 void displayInvalidMessage() {
     cout << "Invalid option. Please choose a valid option.\n";
 }
+void EditProfile(string a) {
+    int fail = 0, max = 3;
+    char choice;
+    string newAccountType;
+    char newAutoTopUp;
+    string userID;
+    userID = a;
+    auto it = find_if(users.begin(), users.end(), [&](User& u) { return u.userID == userID; });
+ if (it == users.end()) {
+        cout << "User not found.\n";
+        return;
+    }
+ while (fail < max) {
+        cout << "Choose field to update (1 for Account Type, 2 for Auto Top-up): ";
+        cin >> choice;
+if (choice == '1') {
+            cout << "Enter new Account Type: ";
+            cin >> newAccountType;
+            it->type = newAccountType[0]; // Assuming the type is a single character
+            cout << "Account Type updated successfully.\n";
+            return;
+        }
+        else if (choice == '2') {
+            cout << "Enter new Auto Top-up setting (Y for Yes, N for No): ";
+            cin >> newAutoTopUp;
+            if (newAutoTopUp == 'Y' || newAutoTopUp == 'N') {
+                it->autoTopUp = newAutoTopUp;
+                cout << "Auto Top-up updated successfully.\n";
+                return;
+            }
+            else {
+                cout << "Invalid input. Please enter 'Y' or 'N'.\n";
+                fail++;
+            }
+        }
+        else {
+            cout << "Invalid choice. Please try again.\n";
+            fail++;
+        }
+    }
+ if (fail == max) {
+        cout << "Too many invalid attempts. Returning to User View Menu.\n";
+    }
+}
 // R1
 void loadStartingData() {
     users = {
@@ -109,7 +153,7 @@ void showUserRecords() {
 // R3
 void editUsers() {
     if (!isDataLoaded) {
-        cout << "Error: Load data first.\n";
+        cout << "Error: Please Load the data first!\n"; 
         return;
     }
     string userID;
