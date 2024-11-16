@@ -191,11 +191,20 @@ void editUsers() {
         do {
             cout << "Enter Token Balance: ";
             cin >> newUser.tokenBalance;
-            if (newUser.tokenBalance >= 0) {
+            if (cin.fail()) {
+                cout << "Invalid balance. ";
+                cin.clear();
+                cin.ignore();
+
+                attempts++;
+            }
+            else if (newUser.tokenBalance >= 0) {
                 break;
             }
-            cout << "Invalid balance. ";
-            attempts++;
+            else {
+                cout << "Invalid balance. ";
+                attempts++;
+            }
         } while (attempts < maxAttempts);
 
         if (attempts >= maxAttempts) {
