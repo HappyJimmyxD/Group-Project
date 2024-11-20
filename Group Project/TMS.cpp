@@ -54,7 +54,7 @@ void SelectAIService(string userID) {
         }
         else if (user.type == 'T')
         {
-            cout << "Error" << endl;
+            cout << "Error, please upgrade your account or no more than 3MB" << endl;
             break;
         }
         else if (size > 3)
