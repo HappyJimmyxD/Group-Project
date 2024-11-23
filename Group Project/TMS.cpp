@@ -51,10 +51,10 @@ void SelectAIService(string userID) {
     User& user = *cs;
     balance = (user.tokenBalance);
 
-    court << "(1)Image Recognition" << endl;
-    court << "(2)Speech-to-text transcription\n";
-    court << "(3)Predictive Analysis" << endl;
-    court << "(4)Natural Language Processing (NLP) \n";
+    cout << "(1)Image Recognition" << endl;
+    cout << "(2)Speech-to-text transcription\n";
+    cout << "(3)Predictive Analysis" << endl;
+    cout << "(4)Natural Language Processing (NLP) \n";
     cout << "Choose a service (1-4): " << endl;
     cin >> ser;
     while (ser == 1) {
@@ -446,6 +446,25 @@ void showSystemUsageSummary() {
 
 }
 // R6
-void CreditsAndExit() {
+void CreditsAndExit(){
+     char confirm;
+     string StudentName[] = {"CHAN Kai Hei", "CHAN Man Pan", "LAM Ho", "LAW Ka Wai", "LEUNG Kam Ho", "TSE Wai Lok" };
+     string StudentID[] = { "23158242A", "23176628A", "23175195A", "23179993A", "23162347A" };
 
-}
+        while (true) {
+            cout << "Are you sure you want to enter CreditsAndExit? (y/n): ";
+            cin >> confirm; 
+            if (confirm == 'y' || confirm == 'Y')
+                cout << left << setw(20) << "Student Name" << setw(40) << "Student ID" << endl; 
+            for (int i = 0; i < 5; ++i) {
+                cout << left << setw(20) << StudentName[i] << setw(40) << StudentID[i] << endl; 
+            }
+            else if (confirm == 'n' || confirm == 'N') {
+                return;
+            }
+            else {
+                cout << "Invalid input. Please enter 'y' or 'n'." << endl;
+            }
+        }
+
+    }
