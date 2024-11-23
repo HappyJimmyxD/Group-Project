@@ -6,11 +6,23 @@
 
 using namespace std;
 
+class Transaction {
+public:
+    string type; 
+    string details; 
+    int tokens;
+    double amount;
+
+    Transaction(string t, string d, int tok, double amt)
+        : type(t), details(d), tokens(tok), amount(amt) {}
+};
+
 struct User {
     string userID;
     char type{};
     int tokenBalance{};
     char autoTopUp{};
+    vector<Transaction> transactions; 
 };
 
 
@@ -27,9 +39,9 @@ void editUsers();
 void enterUserView();
 void showSystemUsageSummary();
 void CreditsAndExit();
-void PurchaseTokens();
+void PurchaseTokens(User& user);
 void EditProfile();
-void ShowTransactionHistory();
+void ShowTransactionHistory(User& user);
 void ReturntoMainMenu();
 void display();
 void enterUserView();
@@ -39,10 +51,10 @@ void SelectAIService(string userID) {
     User& user = *cs;
     balance = (user.tokenBalance);
 
-    cout << "1.Image Recognition" << endl;
-    cout << "2.Speech-to-text transcription\n";
-    cout << "3.Predictive Analysis" << endl;
-    cout << "4.Natural Language Processing (NLP) \n";
+    court << "(1)Image Recognition" << endl;
+    court << "(2)Speech-to-text transcription\n";
+    court << "(3)Predictive Analysis" << endl;
+    court << "(4)Natural Language Processing (NLP) \n";
     cout << "Choose a service (1-4): " << endl;
     cin >> ser;
     while (ser == 1) {
@@ -64,8 +76,13 @@ void SelectAIService(string userID) {
         }
         else if (balance < cost && user.autoTopUp == 'Y' || user.autoTopUp == 'y')
         {
-            while (balance - cost < 0) { balance += 20; }
+            while (balance - cost < 0) {
+                balance += 20;
+                user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
+            }
             cout << balance - cost << "Successfully completed!\n";
+            user.tokenBalance = balance - cost;
+            user.transactions.emplace_back("Service", "Used AI Service", cost, 0);
         }
         else
         {
@@ -74,6 +91,7 @@ void SelectAIService(string userID) {
             break;
         }
         user.tokenBalance -= cost;
+        user.transactions.emplace_back("Service", "Used AI Service", cost, 0);
         break;
     }
 
@@ -92,8 +110,13 @@ void SelectAIService(string userID) {
         }
         else if (balance < cost && user.autoTopUp == 'Y' || user.autoTopUp == 'y')
         {
-            while (balance - cost < 0) { balance += 20; }
+            while (balance - cost < 0) { 
+                balance += 20; 
+                user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
+            }
             cout << balance - cost << "Successfully completed!\n";
+            user.tokenBalance = balance - cost;
+            user.transactions.emplace_back("Service", "Used AI Service", cost, 0);
         }
         else
         {
@@ -101,6 +124,7 @@ void SelectAIService(string userID) {
             user.tokenBalance = balance; break;
         }
         user.tokenBalance -= cost;
+        user.transactions.emplace_back("Service", "Used AI Service", cost, 0);
         break;
     }
     while (ser == 3) {
@@ -112,8 +136,13 @@ void SelectAIService(string userID) {
         }
         else if (balance < cost && user.autoTopUp == 'Y' || user.autoTopUp == 'y')
         {
-            while (balance - cost < 0) { balance += 20; }
+            while (balance - cost < 0) {
+                balance += 20;
+                user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
+            }
             cout << balance - cost << "Successfully completed!\n";
+            user.tokenBalance = balance - cost;
+            user.transactions.emplace_back("Service", "Used AI Service", cost, 0);
         }
         else
         {
@@ -121,6 +150,7 @@ void SelectAIService(string userID) {
             user.tokenBalance = balance; break;
         }
         user.tokenBalance -= cost;
+        user.transactions.emplace_back("Service", "Used AI Service", cost, 0);
         break;
     }
     while (ser == 4) {
@@ -139,8 +169,13 @@ void SelectAIService(string userID) {
         }
         else if (balance < cost && user.autoTopUp == 'Y' || user.autoTopUp == 'y')
         {
-            while (balance - cost < 0) { balance += 20; }
+            while (balance - cost < 0) {
+                balance += 20;
+                user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
+            }
             cout << balance - cost << "Successfully completed!\n";
+            user.tokenBalance = balance - cost;
+            user.transactions.emplace_back("Service", "Used AI Service", cost, 0);
         }
         else
         {
@@ -148,6 +183,7 @@ void SelectAIService(string userID) {
             user.tokenBalance = balance; break;
         }
         user.tokenBalance -= cost;
+        user.transactions.emplace_back("Service", "Used AI Service", cost, 0);
         break;
     }
 }
@@ -345,7 +381,9 @@ void enterUserView() {
     }
     cout << "Action for User ID: \n";
     cin >> userID;
+    cout << endl;
     auto cs = find_if(users.begin(), users.end(), [&](User& u) { return u.userID == userID; });
+    User& user = *cs;
     if (cs != users.end()) {
         while (count <= 3) {
             display();
@@ -353,15 +391,15 @@ void enterUserView() {
             cin >> option;
             switch (option) {
             case 1: SelectAIService(userID); break;
-            case 2: PurchaseTokens(); break;
+            case 2: PurchaseTokens(user); break;
             case 3: EditProfile(); break;
-            case 4: ShowTransactionHistory(); break;
+            case 4: ShowTransactionHistory(user); break;
             case 5: ReturntoMainMenu(); break;
             default: displayInvalidMessage();
             }
         }
     }
-    else cout << "Not Found userID please enter again";
+    else cout << "Not Found userID please enter again\n";
 }
 void display() {
     cout << "***** User View Menu ***** \n";
@@ -373,9 +411,34 @@ void display() {
     cout << "**************************" << endl << " Option(1 - 5) :";
 
 }
-void PurchaseTokens() {}
+void PurchaseTokens(User& user) {
+    int amount;
+    cout << "Enter amount to purchase tokens: ";
+    cin >> amount;
+    if (amount % 2 != 0) {
+        cout << "Invalid amount. Must be an even number.\n";
+        return;
+    }
+    int tokens = amount / 2;
+    user.tokenBalance += tokens;
+    user.transactions.emplace_back("Purchase", "Purchased tokens", tokens, amount);
+    cout << "Purchased " << tokens << " tokens for $" << amount << ". New balance: " << user.tokenBalance << "\n";
+    cout << endl;
+}
 void EditProfile() {}
-void ShowTransactionHistory() {}
+void ShowTransactionHistory(User& user) {
+    if (user.transactions.empty()) {
+        cout << "No transactions made so far.\n";
+        return;
+    }
+    cout << "Transaction History for " << user.userID << ":\n";
+    for (const auto& transaction : user.transactions) {
+        cout << "Type: " << transaction.type
+            << ", Details: " << transaction.details
+            << ", Tokens: " << transaction.tokens
+            << ", Amount: $" << transaction.amount << "\n";
+    }
+    cout << endl;
 void ReturntoMainMenu() {}
 
 // R5
