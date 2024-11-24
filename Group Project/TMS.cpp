@@ -439,6 +439,7 @@ void ShowTransactionHistory(User& user) {
             << ", Amount: $" << transaction.amount << "\n";
     }
     cout << endl;
+}
 void ReturntoMainMenu() {}
 
 // R5
@@ -453,7 +454,7 @@ if (!isDataLoaded) {
     cout<<"The number of tokens spent on Speech-to-text transcription :\n";
     cout<<"The number of tokens spent on Predictive Analysis :\n";
     cout<<"The number of tokens spent on Natural Language Processing (NLP) : \n";
-    cout<<"The total number of tokens spent on all AI services by all users : \n"<<sum;
+    cout<<"The total number of tokens spent on all AI services by all users : \n"<<sum<<"\n";
     cout<<"the total amount of money paid for buying tokens by all users : \n";
     
 }
