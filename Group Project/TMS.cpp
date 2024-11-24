@@ -394,7 +394,7 @@ void enterUserView() {
             case 2: PurchaseTokens(user); break;
             case 3: EditProfile(); break;
             case 4: ShowTransactionHistory(user); break;
-            case 5: ReturntoMainMenu(); break;
+            case 5: return;
             default: displayInvalidMessage();
             }
         }
