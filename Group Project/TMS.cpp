@@ -443,7 +443,19 @@ void ReturntoMainMenu() {}
 
 // R5
 void showSystemUsageSummary() {
-
+if (!isDataLoaded) {
+    cout << "Error: Please Load the data first!\n";
+    return;
+}
+    int sum =0;
+    
+    cout<<"The number of tokens spent on Image Recognition :\n";
+    cout<<"The number of tokens spent on Speech-to-text transcription :\n";
+    cout<<"The number of tokens spent on Predictive Analysis :\n";
+    cout<<"The number of tokens spent on Natural Language Processing (NLP) : \n";
+    cout<<"The total number of tokens spent on all AI services by all users : \n"<<sum;
+    cout<<"the total amount of money paid for buying tokens by all users : \n";
+    
 }
 // R6
 void CreditsAndExit(){
