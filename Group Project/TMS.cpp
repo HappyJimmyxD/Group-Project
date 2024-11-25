@@ -439,6 +439,7 @@ void PurchaseTokens(User& user) {
         return;
     }
     int tokens = amount / 2;
+    money = money + tokens;//For R5
     user.tokenBalance += tokens;
     user.totalAmountPaid += amount;
     user.transactions.emplace_back("Purchase", "Purchased tokens", tokens, amount);
