@@ -13,8 +13,12 @@ public:
     int tokens;
     double amount;
 
-    Transaction(string t, string d, int tok, double amt)
-        : type(t), details(d), tokens(tok), amount(amt) {}
+    Transaction(string t, string d, int tok, double amt){
+        type = t;
+        details = d;
+        tokens = tok;
+        amount = amt;
+    }
 };
 
 struct User {
