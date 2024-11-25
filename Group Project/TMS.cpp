@@ -21,14 +21,23 @@ public:
     }
 };
 
-struct User {
+class User {
+public:
     string userID;
     char type{};
     int tokenBalance{};
     char autoTopUp{};
-    double totalAmountPaid;
+    double totalAmountPaid = 0;
     vector<Transaction> transactions; 
+
+    User(string id, char t, int balance, char topUp) {
+        userID = id;
+        type = t;
+        tokenBalance = balance;
+        autoTopUp = topUp;
+    }
 };
+
 int token1 = 0;//R5
 int token2 = 0;
 int token3 = 0;
@@ -60,10 +69,12 @@ void SelectAIService(string userID) {
     User& user = *cs;
     balance = (user.tokenBalance);
 
+    cout << "**** AI Service Menu ***** \n";
     cout << "(1)Image Recognition" << endl;
     cout << "(2)Speech-to-text transcription\n";
     cout << "(3)Predictive Analysis" << endl;
     cout << "(4)Natural Language Processing (NLP) \n";
+    cout << "************************** \n"
     cout << "Choose a service (1-4): " << endl;
     cin >> ser;
     while (ser == 1) {
@@ -302,7 +313,7 @@ void editUsers() {
     if (cs == users.end()) {
 
         cout << "User not found. Adding new user.\n";
-        User newUser;
+        User newUser(userID, 'T', 0, 'N');
         newUser.userID = userID;
 
         int attempts = 0;
@@ -412,6 +423,7 @@ void enterUserView() {
             display();
             int option;
             cin >> option;
+            cout << endl;
             switch (option) {
             case 1: SelectAIService(userID); break;
             case 2: PurchaseTokens(user); break;
