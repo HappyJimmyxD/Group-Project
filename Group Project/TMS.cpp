@@ -25,7 +25,11 @@ struct User {
     double totalAmountPaid;
     vector<Transaction> transactions; 
 };
-
+int token1 = 0;//R5
+int token2 = 0;
+int token3 = 0;
+int token4 = 0;
+int money = 0;
 
 vector<User> users;
 bool isDataLoaded = false;
@@ -64,6 +68,7 @@ void SelectAIService(string userID) {
         if (size <= 3)
         {
             cost = (user.type == 'T') ? 5 : (user.type == 'F') ? 5 : 4;
+            token1 = token1+cost;//For R5
         }
         else if (user.type == 'T')
         {
@@ -72,6 +77,7 @@ void SelectAIService(string userID) {
         }
         else if (size > 3)
             cost = (user.type == 'F') ? 8 : 7;
+          token1 = token1+cost;//For R5
         if (balance >= cost) {
             cout << "Token remains:" << balance - cost << ", Successfully completed!\n\n";
         }
@@ -79,6 +85,7 @@ void SelectAIService(string userID) {
         {
             while (balance - cost < 0) {
                 balance += 20;
+                money = money + 20;//For R5
                 user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
                 user.totalAmountPaid += 20;
             }
@@ -102,10 +109,12 @@ void SelectAIService(string userID) {
         cin >> size;
         if (size <= 3) {
             cost = size * 2;
+            token2 = token2+cost;//For R5
         }
         else {
             cost = (size - 3) * 3;
             cost += 6;
+            token2 = token2+cost;//For R5
         }
         if (balance >= cost) {
             cout << "Token remains:" << balance - cost << ", Successfully completed!\n\n";
@@ -114,6 +123,7 @@ void SelectAIService(string userID) {
         {
             while (balance - cost < 0) { 
                 balance += 20; 
+                money = money + 20;//For R5
                 user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
                 user.totalAmountPaid += 20;
             }
@@ -134,6 +144,7 @@ void SelectAIService(string userID) {
         cout << "How many tasks do you need to analyze: \n";
         cin >> size;
         cost = size * 10;
+        token3 = token3+cost;//For R5
         if (balance >= cost) {
             cout << "Token remains:" << balance - cost << ", Successfully completed!\n\n";
         }
@@ -143,6 +154,7 @@ void SelectAIService(string userID) {
                 balance += 20;
                 user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
                 user.totalAmountPaid += 20;
+                money = money + 20;//For R5
             }
             cout << "Token remains:" << balance - cost << ", Successfully completed!\n\n";
             user.tokenBalance = balance - cost;
@@ -168,6 +180,7 @@ void SelectAIService(string userID) {
         else
             num = size / 500;
         cost = 1 * num;
+        token4 = token4+cost;
         if (balance >= cost) {
             cout << "Token remains:" << balance - cost << ", Successfully completed!\n\n";
         }
@@ -175,6 +188,7 @@ void SelectAIService(string userID) {
         {
             while (balance - cost < 0) {
                 balance += 20;
+                money = money + 20;//For R5
                 user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
                 user.totalAmountPaid += 20;
             }
@@ -454,14 +468,16 @@ if (!isDataLoaded) {
     cout << "Error: Please Load the data first!\n";
     return;
 }
-    int sum =0;
-    
-    cout<<"The number of tokens spent on Image Recognition :\n";
-    cout<<"The number of tokens spent on Speech-to-text transcription :\n";
-    cout<<"The number of tokens spent on Predictive Analysis :\n";
-    cout<<"The number of tokens spent on Natural Language Processing (NLP) : \n";
-    cout<<"The total number of tokens spent on all AI services by all users : \n"<<sum<<"\n";
-    cout<<"the total amount of money paid for buying tokens by all users : \n";
+     int money_paid = 0;
+ int sum = 0;
+ sum = token1 + token2 + token3 + token4;
+ money_paid = money * 2;
+ cout << "The number of tokens spent on Image Recognition :\n"<<token1<<"\n";
+ cout << "The number of tokens spent on Speech-to-text transcription :\n"<<token2<<"\n";
+ cout << "The number of tokens spent on Predictive Analysis :\n" << token3 << "\n";
+ cout << "The number of tokens spent on Natural Language Processing (NLP) :\n"<<token4<<"\n";
+ cout << "The total number of tokens spent on all AI services by all users : \n" << sum<<"\n";
+ cout << "The total amount of money paid for buying tokens by all users : \n" << money_paid << "\n";
     
 }
 // R6
