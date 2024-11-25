@@ -22,6 +22,7 @@ struct User {
     char type{};
     int tokenBalance{};
     char autoTopUp{};
+    double totalAmountPaid;
     vector<Transaction> transactions; 
 };
 
@@ -79,6 +80,7 @@ void SelectAIService(string userID) {
             while (balance - cost < 0) {
                 balance += 20;
                 user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
+                user.totalAmountPaid += 20;
             }
             cout << balance - cost << "Successfully completed!\n";
             user.tokenBalance = balance - cost;
@@ -113,6 +115,7 @@ void SelectAIService(string userID) {
             while (balance - cost < 0) { 
                 balance += 20; 
                 user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
+                user.totalAmountPaid += 20;
             }
             cout << balance - cost << "Successfully completed!\n";
             user.tokenBalance = balance - cost;
@@ -139,6 +142,7 @@ void SelectAIService(string userID) {
             while (balance - cost < 0) {
                 balance += 20;
                 user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
+                user.totalAmountPaid += 20;
             }
             cout << balance - cost << "Successfully completed!\n";
             user.tokenBalance = balance - cost;
@@ -172,6 +176,7 @@ void SelectAIService(string userID) {
             while (balance - cost < 0) {
                 balance += 20;
                 user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
+                user.totalAmountPaid += 20;
             }
             cout << balance - cost << "Successfully completed!\n";
             user.tokenBalance = balance - cost;
@@ -421,6 +426,7 @@ void PurchaseTokens(User& user) {
     }
     int tokens = amount / 2;
     user.tokenBalance += tokens;
+    user.totalAmountPaid += amount;
     user.transactions.emplace_back("Purchase", "Purchased tokens", tokens, amount);
     cout << "Purchased " << tokens << " tokens for $" << amount << ". New balance: " << user.tokenBalance << "\n";
     cout << endl;
@@ -438,7 +444,7 @@ void ShowTransactionHistory(User& user) {
             << ", Tokens: " << transaction.tokens
             << ", Amount: $" << transaction.amount << "\n";
     }
-    cout << endl;
+    cout << "Total Amount Paid: $" << user.totalAmountPaid << endl;
 }
 void ReturntoMainMenu() {}
 
