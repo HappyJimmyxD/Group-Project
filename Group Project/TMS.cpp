@@ -73,7 +73,7 @@ void SelectAIService(string userID) {
         else if (size > 3)
             cost = (user.type == 'F') ? 8 : 7;
         if (balance >= cost) {
-            cout << balance - cost << "Successfully completed!\n";
+            cout << "Token remains:" << balance - cost << ", Successfully completed!\n\n";
         }
         else if (balance < cost && user.autoTopUp == 'Y' || user.autoTopUp == 'y')
         {
@@ -82,7 +82,7 @@ void SelectAIService(string userID) {
                 user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
                 user.totalAmountPaid += 20;
             }
-            cout << balance - cost << "Successfully completed!\n";
+            cout << "Token remains:" << balance - cost << ", Successfully completed!\n\n";
             user.tokenBalance = balance - cost;
             user.transactions.emplace_back("Service", "Used AI Service", cost, 0);
         }
@@ -108,7 +108,7 @@ void SelectAIService(string userID) {
             cost += 6;
         }
         if (balance >= cost) {
-            cout << balance - cost << "Successfully completed!\n";
+            cout << "Token remains:" << balance - cost << ", Successfully completed!\n\n";
         }
         else if (balance < cost && user.autoTopUp == 'Y' || user.autoTopUp == 'y')
         {
@@ -117,7 +117,7 @@ void SelectAIService(string userID) {
                 user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
                 user.totalAmountPaid += 20;
             }
-            cout << balance - cost << "Successfully completed!\n";
+            cout << "Token remains:" << balance - cost << ", Successfully completed!\n\n";
             user.tokenBalance = balance - cost;
             user.transactions.emplace_back("Service", "Used AI Service", cost, 0);
         }
@@ -135,7 +135,7 @@ void SelectAIService(string userID) {
         cin >> size;
         cost = size * 10;
         if (balance >= cost) {
-            cout << balance - cost << "Successfully completed!\n";
+            cout << "Token remains:" << balance - cost << ", Successfully completed!\n\n";
         }
         else if (balance < cost && user.autoTopUp == 'Y' || user.autoTopUp == 'y')
         {
@@ -144,7 +144,7 @@ void SelectAIService(string userID) {
                 user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
                 user.totalAmountPaid += 20;
             }
-            cout << balance - cost << "Successfully completed!\n";
+            cout << "Token remains:" << balance - cost << ", Successfully completed!\n\n";
             user.tokenBalance = balance - cost;
             user.transactions.emplace_back("Service", "Used AI Service", cost, 0);
         }
@@ -169,7 +169,7 @@ void SelectAIService(string userID) {
             num = size / 500;
         cost = 1 * num;
         if (balance >= cost) {
-            cout << balance - cost << "Successfully completed!\n";
+            cout << "Token remains:" << balance - cost << ", Successfully completed!\n\n";
         }
         else if (balance < cost && user.autoTopUp == 'Y' || user.autoTopUp == 'y')
         {
@@ -178,7 +178,7 @@ void SelectAIService(string userID) {
                 user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);
                 user.totalAmountPaid += 20;
             }
-            cout << balance - cost << "Successfully completed!\n";
+            cout << "Token remains:" << balance - cost << ", Successfully completed!\n\n";
             user.tokenBalance = balance - cost;
             user.transactions.emplace_back("Service", "Used AI Service", cost, 0);
         }
@@ -444,7 +444,7 @@ void ShowTransactionHistory(User& user) {
             << ", Tokens: " << transaction.tokens
             << ", Amount: $" << transaction.amount << "\n";
     }
-    cout << "Total Amount Paid: $" << user.totalAmountPaid << endl;
+    cout << "Total Amount Paid: $" << user.totalAmountPaid << "\n\n";
 }
 void ReturntoMainMenu() {}
 
