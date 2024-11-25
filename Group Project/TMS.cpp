@@ -489,7 +489,7 @@ if (!isDataLoaded) {
 void CreditsAndExit() {
     char confirm;
     string StudentName[] = { "CHAN Kai Hei", "CHAN Man Pan", "LAM Ho", "LAW Ka Wai", "LEUNG Kam Ho", "TSE Wai Lok" };
-    string StudentID[] = { "23158242A", "23176628A", "23175195A", "23179993A", "23162347A" };
+    string StudentID[] = { "23158242A", "23054778A", "23176628A", "23175195A", "23179993A", "23162347A" };
 
     while (true) {
         cout << "Are you sure you want to enter CreditsAndExit? (y/n): ";
