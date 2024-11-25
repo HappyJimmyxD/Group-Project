@@ -458,10 +458,10 @@ void ShowTransactionHistory(User& user) {
     }
     cout << "Transaction History for " << user.userID << ":\n";
     for (const auto& transaction : user.transactions) {
-        cout << "Type: " << transaction.type
-            << ", Details: " << transaction.details
-            << ", Tokens: " << transaction.tokens
-            << ", Amount: $" << transaction.amount << "\n";
+        cout << "Type: " << transaction.type;
+        cout << ", Details: " << transaction.details;
+        cout << ", Tokens: " << transaction.tokens;
+        cout << ", Amount: $" << transaction.amount << "\n";
     }
     cout << "Total Amount Paid: $" << user.totalAmountPaid << "\n\n";
 }
