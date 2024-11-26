@@ -323,10 +323,12 @@ void SelectAIService(string userID) {
         cout<< "endl";
         if (size <= 3) {
             cost = size * 2;
+            token2 = token2 + cost;//This is for R5
         }
         else {
             cost = (size - 3) * 3;
             cost += 6;
+            token2 = token2 + cost;//This is for R5
         }
         break;
     }
@@ -335,6 +337,7 @@ void SelectAIService(string userID) {
         cin >> size;
         cout << "endl";
         cost = size * 10;
+        token3 = token3+cost;//This is for R5
         break;
     }
     while (ser == 4) {
@@ -349,6 +352,7 @@ void SelectAIService(string userID) {
         else
             num = size / 500;
         cost =num;
+        token4 =token4+cost;//This is for R5
 
         break;
     }if (ser = 1 && user.type == 'T' &&size>3 );
@@ -360,7 +364,7 @@ void SelectAIService(string userID) {
     {
         while (balance - cost < 0) { 
             balance += 20; 
-            money = money + 20;//For R5
+            money = money + 20;//This is for R5
             user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);//for R4.4
             user.totalAmountPaid += 20;                   
         }
