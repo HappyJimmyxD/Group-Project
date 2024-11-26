@@ -350,7 +350,7 @@ void SelectAIService(string userID) {
     }if (ser = 1 && user.type == 'T' &&size>3 );
     else if (balance >= cost) {
 
-        cout << "Token remains: " << balance - cost << "Successfully completed!\n";
+        cout << "Token remains: " << balance - cost << "  Successfully completed!\n";
     }
     else if (balance < cost && user.autoTopUp == 'Y' || user.autoTopUp == 'y')
     {
