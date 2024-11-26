@@ -304,6 +304,7 @@ void SelectAIService(string userID) {
     while (ser == 1) {
         cout << "What is the size of the picture: \n";
         cin >> size;
+        cout << "endl";
         if (size <= 3)
         {
             cost = (user.type == 'T') ? 5 : (user.type == 'F') ? 5 : 4;
@@ -319,6 +320,7 @@ void SelectAIService(string userID) {
     while (ser == 2) {
         cout << "What is the length of Audio: \n";
         cin >> size;
+        cout<< "endl";
         if (size <= 3) {
             cost = size * 2;
         }
@@ -331,6 +333,7 @@ void SelectAIService(string userID) {
     while (ser == 3) {
         cout << "How many tasks do you need to analyze: \n";
         cin >> size;
+        cout << "endl";
         cost = size * 10;
         break;
     }
@@ -338,6 +341,7 @@ void SelectAIService(string userID) {
         int num;
         cout << "What is the length of text for NLP: \n";
         cin >> size;
+        cout << "endl";
         if (size > 2500 && user.type == 'T')
             cout << "Please upgrade your user type\n";
         else if (size % 500 != 0)
@@ -350,12 +354,18 @@ void SelectAIService(string userID) {
     }if (ser = 1 && user.type == 'T' &&size>3 );
     else if (balance >= cost) {
 
-        cout << "Token remains: " << balance - cost << "  Successfully completed!\n";
+        cout << "Token remains: " << balance - cost << ", Successfully completed!\n";
     }
     else if (balance < cost && user.autoTopUp == 'Y' || user.autoTopUp == 'y')
     {
-        while (balance - cost < 0) { balance += 20; }
-        cout << balance - cost << "Successfully completed!\n";
+        while (balance - cost < 0) { 
+            balance += 20; 
+            money = money + 20;//For R5
+            user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);//for R4.4
+            user.totalAmountPaid += 20;                   
+        }
+        cout <<"Token remains: " << balance - cost << ", Successfully completed!\n";
+        user.transactions.emplace_back("Service 1", "Used AI Service", cost, 0);//for R4.4
     }
     else
     {
@@ -363,6 +373,7 @@ void SelectAIService(string userID) {
         user.tokenBalance = balance;
     }
     user.tokenBalance -= cost;
+    user.transactions.emplace_back("Service 1", "Used AI Service", cost, 0);//for R4.4
 }
 
 void PurchaseTokens(User& user) {
