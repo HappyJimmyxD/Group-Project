@@ -74,7 +74,7 @@ void SelectAIService(string userID) {
     cout << "(2)Speech-to-text transcription\n";
     cout << "(3)Predictive Analysis" << endl;
     cout << "(4)Natural Language Processing (NLP) \n";
-    cout << "************************** \n"
+    cout << "************************** \n";
     cout << "Choose a service (1-4): " << endl;
     cin >> ser;
     while (ser == 1) {
