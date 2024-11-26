@@ -308,6 +308,7 @@ void SelectAIService(string userID) {
         if (size <= 3)
         {
             cost = (user.type == 'T') ? 5 : (user.type == 'F') ? 5 : 4;
+            token1= token1+cost;//This is for R5
         }
         else if (user.type == 'T')
         {
