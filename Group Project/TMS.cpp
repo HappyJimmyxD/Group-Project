@@ -418,6 +418,10 @@ if (!isDataLoaded) {
 }
 // R6
 void CreditsAndExit() {
+     if (!isDataLoaded) {
+        cout << "Error: Please Load the data first!\n";
+        return;
+    }
     char confirm;
     string StudentName[] = { "CHAN Kai Hei", "CHAN Man Pan", "LAM Ho", "LAW Ka Wai", "LEUNG Kam Ho", "TSE Wai Lok" };
     string StudentID[] = { "23158242A", "23054778A", "23176628A", "23175195A", "23179993A", "23162347A" };
