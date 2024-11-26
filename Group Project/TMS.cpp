@@ -418,10 +418,6 @@ if (!isDataLoaded) {
 }
 // R6
 void CreditsAndExit() {
-     if (!isDataLoaded) {
-        cout << "Error: Please Load the data first!\n";
-        return;
-    }
     char confirm;
     string StudentName[] = { "CHAN Kai Hei", "CHAN Man Pan", "LAM Ho", "LAW Ka Wai", "LEUNG Kam Ho", "TSE Wai Lok" };
     string StudentID[] = { "23158242A", "23054778A", "23176628A", "23175195A", "23179993A", "23162347A" };
@@ -433,7 +429,7 @@ void CreditsAndExit() {
             cout << left << setw(20) << "Student Name" << setw(40) << "Student ID" << endl;
             for (int i = 0; i < 6; ++i) {
                 cout << left << setw(20) << StudentName[i] << setw(40) << StudentID[i] << endl;
-            }
+            }break;
         }
         else if (confirm == 'n' || confirm == 'N') {
             return;
