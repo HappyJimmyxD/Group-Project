@@ -317,6 +317,7 @@ void SelectAIService(string userID) {
         }
         else if (size > 3)
     cost = (user.type == 'F') ? 8 : 7;
+         token1= token1+cost;//This is for R5
         break;
     }
 
