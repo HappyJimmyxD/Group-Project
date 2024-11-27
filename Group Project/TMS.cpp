@@ -302,7 +302,7 @@ void SelectAIService(string userID) {
     cout << "Choose a service (1-4): " << endl;
     cin >> ser;
     while (ser == 1) {
-        cout << "What is the size of the picture: \n";
+        cout << "What is the size of the picture (in MB): \n";
         cin >> size;
         cout << endl;
         if (size <= 3)
@@ -322,7 +322,7 @@ void SelectAIService(string userID) {
     }
 
     while (ser == 2) {
-        cout << "What is the length of Audio: \n";
+        cout << "What is the length of Audio (in mins): \n";
         cin >> size;
         cout<< endl;
         if (size <= 3) {
