@@ -315,6 +315,8 @@ void SelectAIService(string userID) {
             cout << "Error, please upgrade your account or no more than 3MB" << endl;
 
         }
+        else if (size > 3)
+    cost = (user.type == 'F') ? 8 : 7;
         break;
     }
 
