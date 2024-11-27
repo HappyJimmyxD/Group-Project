@@ -56,7 +56,7 @@ void showUserRecords();
 void editUsers();
 void enterUserView();
 void showSystemUsageSummary();
-void CreditsAndExit();
+void CreditsAndExit(int &);
 void PurchaseTokens(User& user);
 void EditProfile();
 void ShowTransactionHistory(User& user);
@@ -68,7 +68,7 @@ void SelectAIService(string userID);
 
 int main() {
     displayWelcomeMessage();
-    int option;
+    int option,num=0;
 
     do {
         displayMainMenu();
@@ -80,10 +80,10 @@ int main() {
         case 3: editUsers(); break;
         case 4: enterUserView(); break;
         case 5: showSystemUsageSummary(); break;
-        case 6: CreditsAndExit(); return 0;
+        case 6: CreditsAndExit(num); if (num==7) return 0; else break;
         default: displayInvalidMessage();
         }
-    } while (option != 6);
+    } while (option<=6||option>=1);
 }
 
 void displayMainMenu() {
@@ -436,7 +436,7 @@ if (!isDataLoaded) {
     
 }
 // R6
-void CreditsAndExit() {
+void CreditsAndExit(int &num) {
     char confirm;
     string StudentName[] = { "CHAN Kai Hei", "CHAN Man Pan", "LAM Ho", "LAW Ka Wai", "LEUNG Kam Ho", "TSE Wai Lok" };
     string StudentID[] = { "23158242A", "23054778A", "23176628A", "23175195A", "23179993A", "23162347A" };
@@ -448,10 +448,10 @@ void CreditsAndExit() {
             cout << left << setw(20) << "Student Name" << setw(40) << "Student ID" << endl;
             for (int i = 0; i < 6; ++i) {
                 cout << left << setw(20) << StudentName[i] << setw(40) << StudentID[i] << endl;
-            }break;
+            }num = 7; return;
         }
         else if (confirm == 'n' || confirm == 'N') {
-            return;
+            num = 8; return;
         }
         else {
             cout << "Invalid input. Please enter 'y' or 'n'." << endl;
