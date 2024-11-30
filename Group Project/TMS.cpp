@@ -44,7 +44,7 @@ int token3 = 0;
 int token4 = 0;
 int money = 0;
 
-vector<User> users;
+vector<User> users(100);
 bool isDataLoaded = false;
 
 
@@ -99,7 +99,7 @@ void displayMainMenu() {
 }
 
 void displayWelcomeMessage() {
-    cout << "Welcome to the Program!\n";
+    cout << "Welcome to the AI Service Token Management System!\n";
 }
 
 void displayInvalidMessage() {
@@ -149,6 +149,12 @@ void editUsers() {
         cout << "Error: Please Load the data first!\n";
         return;
     }
+
+    if (users.size() >= 100) {
+        cout << "Error! The maximum user limit is reached! ";
+        return;
+    }
+
     string userID;
     cout << "Enter User ID to edit: ";
     cin >> userID;
