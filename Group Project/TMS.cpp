@@ -163,7 +163,13 @@ void editUsers() {
     string userID;
     cout << "Enter User ID to edit: ";
     cin >> userID;
+
+    for (char& c : userID) {
+        c = toupper(c);
+    }
+
     auto cs = find_if(users.begin(), users.end(), [&](User& u) { return u.userID == userID; });
+
     if (cs == users.end()) {
 
         cout << "User not found. Adding new user.\n";
