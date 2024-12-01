@@ -417,7 +417,7 @@ void EditProfile() {
  cout << "Enter User ID: ";
  cin >> userID;
 
- auto it = find_if(users.begin(), users.end(), & { return u.userID == userID; });
+  auto it = find_if(users.begin(), users.end(), [&](User& u) { return u.userID  == userID; });
 
  if (it == users.end()) {
      cout << "User not found.\n";
@@ -429,7 +429,7 @@ void EditProfile() {
 
      if (choice == '1') {
          cout << "Enter new Account Type: ";
-         string oldAccountType = it->type;//save old data for 4.6
+         char oldAccountType = it->type;//save old data for 4.6
          cin >> newAccountType;
          it->type = newAccountType[0]; //replace
          cout << "Account Type updated successfully.\n";
@@ -437,7 +437,7 @@ void EditProfile() {
      }
      else if (choice == '2') {
          cout << "Enter new Auto Top-up setting (Y for Yes, N for No): ";
-         string oldautoTopUp = it->autoTopUp;//save old data for 4.6
+         char oldautoTopUp = it->autoTopUp;//save old data for 4.6
          cin >> newAutoTopUp;
          if ((newAutoTopUp == 'Y') || (newAutoTopUp == 'N')) {
              it->autoTopUp = newAutoTopUp; //replace
