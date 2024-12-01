@@ -265,24 +265,29 @@ void enterUserView() {
     cin >> userID;
     cout << endl;
     auto cs = find_if(users.begin(), users.end(), [&](User& u) { return u.userID == userID; });
+    
+    if (cs == users.end()) {
+    cout << "UserID not found\n";
+    return;
+    }
+    
     User& user = *cs;
-    if (cs != users.end()) {
-        while (count <= 3) {
-            display();
-            int option;
-            cin >> option;
-            cout << endl;
-            switch (option) {
-            case 1: SelectAIService(userID); break;
-            case 2: PurchaseTokens(user); break;
-            case 3: EditProfile(userID); break;
-            case 4: ShowTransactionHistory(user); break;
-            case 5: return;
-            default: displayInvalidMessage();
-            }
+    
+    while (count <= 3) {
+        display();
+        int option;
+        cin >> option;
+        cout << endl;
+        switch (option) {
+        case 1: SelectAIService(userID); break;
+        case 2: PurchaseTokens(user); break;
+        case 3: EditProfile(userID); break;
+        case 4: ShowTransactionHistory(user); break;
+        case 5: return;
+        default: displayInvalidMessage();
         }
     }
-    else cout << "Not Found userID please enter again\n";
+    
 }
 void display() {
     cout << "***** User View Menu ***** \n";
