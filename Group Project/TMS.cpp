@@ -408,7 +408,7 @@ void SelectAIService(string userID) {
             user.tokenBalance += 20;
             money = money + 20;//This is for R5
             user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);//for R4.4
-            user.totalAmountPaid += 20;
+            user.totalAmountPaid += 40;
         }
         cout << "Token Balance After AutoTopUp: " << balance << endl;
         cout << "Token remains: " << balance - cost << ", Successfully completed!\n\n";
