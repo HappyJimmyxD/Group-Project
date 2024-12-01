@@ -169,10 +169,6 @@ void editUsers() {
     cout << "Enter User ID to edit: ";
     cin >> userID;
 
-    for (char& c : userID) {
-        c = toupper(c);
-    }
-
     auto cs = find_if(users.begin(), users.end(), [&](User& u) { return u.userID == userID; });
 
     if (cs == users.end()) {
