@@ -8,12 +8,12 @@ using namespace std;
 
 class Transaction {
 public:
-    string type; 
-    string details; 
+    string type;
+    string details;
     int tokens;
     double amount;
 
-    Transaction(string t, string d, int tok, double amt){
+    Transaction(string t, string d, int tok, double amt) {
         type = t;
         details = d;
         tokens = tok;
@@ -31,7 +31,7 @@ public:
     int originalTokenBalance{};
     char originalAutoTopUp{};
     double totalAmountPaid = 0;
-    vector<Transaction> transactions; 
+    vector<Transaction> transactions;
 
     User(string id, char t, int balance, char topUp) {
         userID = id;
@@ -62,7 +62,7 @@ void showUserRecords();
 void editUsers();
 void enterUserView();
 void showSystemUsageSummary();
-void CreditsAndExit(int &);
+void CreditsAndExit(int&);
 void PurchaseTokens(User& user);
 void EditProfile(string userID);
 void ShowTransactionHistory(User& user);
@@ -73,7 +73,7 @@ void SelectAIService(string userID);
 
 int main() {
     displayWelcomeMessage();
-    int option,num=0;
+    int option, num = 0;
 
     do {
         displayMainMenu();
@@ -90,10 +90,10 @@ int main() {
         case 3: editUsers(); break;
         case 4: enterUserView(); break;
         case 5: showSystemUsageSummary(); break;
-        case 6: CreditsAndExit(num); if (num==7) return 0; else break;
+        case 6: CreditsAndExit(num); if (num == 7) return 0; else break;
         default: displayInvalidMessage();
         }
-    } while (option<=6||option>=1);
+    } while (option <= 6 || option >= 1);
 }
 
 void displayMainMenu() {
@@ -168,6 +168,10 @@ void editUsers() {
     string userID;
     cout << "Enter User ID to edit: ";
     cin >> userID;
+
+    for (char& c : userID) {
+        c = toupper(c);
+    }
 
     auto cs = find_if(users.begin(), users.end(), [&](User& u) { return u.userID == userID; });
 
@@ -278,14 +282,14 @@ void enterUserView() {
     cin >> userID;
     cout << endl;
     auto cs = find_if(users.begin(), users.end(), [&](User& u) { return u.userID == userID; });
-    
+
     if (cs == users.end()) {
-    cout << "UserID not found\n";
-    return;
+        cout << "UserID not found\n";
+        return;
     }
-    
+
     User& user = *cs;
-    
+
     while (count <= 3) {
         display();
         int option;
@@ -306,7 +310,7 @@ void enterUserView() {
         default: displayInvalidMessage();
         }
     }
-    
+
 }
 void display() {
     cout << "***** User View Menu ***** \n";
@@ -315,7 +319,7 @@ void display() {
     cout << "[3] Edit Profile\n";
     cout << "[4] Show Transaction History\n";
     cout << "[5] Return to Main Menu\n";
-    cout << "**************************" << endl << " Option(1 - 5) :";
+    cout << "**************************" << endl << "Option(1 - 5) :";
 
 }
 void SelectAIService(string userID) {
@@ -328,6 +332,7 @@ void SelectAIService(string userID) {
     cout << "2.Speech-to-text transcription\n";
     cout << "3.Predictive Analysis" << endl;
     cout << "4.Natural Language Processing (NLP) \n";
+    cout << "**************************\n";
     cout << "Choose a service (1-4): " << endl;
     cin >> ser;
     while (ser == 1) {
@@ -390,7 +395,11 @@ void SelectAIService(string userID) {
 
         break;
     }
-      if (balance >= cost) {
+    while (ser > 4 || ser < 1) {
+        displayInvalidMessage();
+        return;
+    }
+    if (balance >= cost) {
         cout << "Token Balance: " << balance << endl;
         cout << "Token remains: " << balance - cost << ", Successfully completed!\n";
         user.tokenBalance -= cost;
@@ -404,20 +413,20 @@ void SelectAIService(string userID) {
             user.tokenBalance += 20;
             money = money + 20;//This is for R5
             user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);//for R4.4
-            user.totalAmountPaid += 20;
+            user.totalAmountPaid += 40;
         }
-        cout << "Token Balance After AutoTopUp: " << balance << endl;
+        cout << "Original Token Balance After AutoTopUp: " << balance << endl;
         cout << "Token remains: " << balance - cost << ", Successfully completed!\n\n";
         user.tokenBalance -= cost;
         user.transactions.emplace_back("Service 1", "Used AI Service", cost, 0);//for R4.4
     }
     else {
-        cout << "Your current Token Balance:" << balance<<endl;
+        cout << "Your current Token Balance:" << balance << endl;
         cout << "You need " << cost << " Token" << endl;
         cout << "Balance not enought" << endl;
         user.tokenBalance = balance;
     }
-    
+
 }
 void PurchaseTokens(User& user) {
     int amount;
@@ -458,13 +467,13 @@ void EditProfile(string userID) {
             cout << "Your current Account Type: " << user.type << endl;
             cout << "Enter new Account Type: ";
             cin >> newAccountType;
-            cs->type = newAccountType ; //replace
+            cs->type = newAccountType; //replace
             cout << "Account Type updated successfully.\n";
-            
+
             if (user.originalType != newAccountType) {    //R4.6
-        cout << "User type is changed from " << user.originalType << " to " << newAccountType << endl;//display the change of profile
-    }
- cout << endl;
+                cout << "User type is changed from " << user.originalType << " to " << newAccountType << endl;//display the change of profile
+            }
+            cout << endl;
             return;
         }
         else if (choice == '2') {
@@ -474,11 +483,11 @@ void EditProfile(string userID) {
             if ((newAutoTopUp == 'Y') || (newAutoTopUp == 'N')) {
                 cs->autoTopUp = newAutoTopUp; //replace
                 cout << "Auto Top-up updated successfully.\n";
-                 
-               if (user.originalAutoTopUp != newAutoTopUp) {      //R4.6
-    cout << "Auto Top-up setting is changed from " << user.originalAutoTopUp << " to " << newAutoTopUp << endl;//display the change of profile
-}
-cout << endl;
+
+                if (user.originalAutoTopUp != newAutoTopUp) {      //R4.6
+                    cout << "Auto Top-up setting is changed from " << user.originalAutoTopUp << " to " << newAutoTopUp << endl;//display the change of profile
+                }
+                cout << endl;
                 return;
             }
             else {
@@ -512,24 +521,24 @@ void ShowTransactionHistory(User& user) {
 
 // R5
 void showSystemUsageSummary() {
-if (!isDataLoaded) {
-    cout << "Error: Please Load the data first!\n";
-    return;
-}
-     int money_paid = 0;
- int sum = 0;
- sum = token1 + token2 + token3 + token4;
- money_paid = money * 2;
- cout << "The number of tokens spent on Image Recognition :\n"<<token1<<"\n";
- cout << "The number of tokens spent on Speech-to-text transcription :\n"<<token2<<"\n";
- cout << "The number of tokens spent on Predictive Analysis :\n" << token3 << "\n";
- cout << "The number of tokens spent on Natural Language Processing (NLP) :\n"<<token4<<"\n";
- cout << "The total number of tokens spent on all AI services by all users : \n" << sum<<"\n";
- cout << "The total amount of money paid for buying tokens by all users : \n" << money_paid << "\n";
-    
+    if (!isDataLoaded) {
+        cout << "Error: Please Load the data first!\n";
+        return;
+    }
+    int money_paid = 0;
+    int sum = 0;
+    sum = token1 + token2 + token3 + token4;
+    money_paid = money * 2;
+    cout << "The number of tokens spent on Image Recognition :\n" << token1 << "\n";
+    cout << "The number of tokens spent on Speech-to-text transcription :\n" << token2 << "\n";
+    cout << "The number of tokens spent on Predictive Analysis :\n" << token3 << "\n";
+    cout << "The number of tokens spent on Natural Language Processing (NLP) :\n" << token4 << "\n";
+    cout << "The total number of tokens spent on all AI services by all users : \n" << sum << "\n";
+    cout << "The total amount of money paid for buying tokens by all users : \n" << money_paid << "\n";
+
 }
 // R6
-void CreditsAndExit(int &num) {
+void CreditsAndExit(int& num) {
     char confirm;
     string StudentName[] = { "CHAN Kai Hei", "CHAN Man Pan", "LAM Ho", "LAW Ka Wai", "LEUNG Kam Ho", "TSE Wai Lok" };
     string StudentID[] = { "23158242A", "23114116A", "23176628A", "23175195A", "23179993A", "23162347A" };
