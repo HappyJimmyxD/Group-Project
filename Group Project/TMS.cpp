@@ -318,7 +318,7 @@ void SelectAIService(string userID) {
         if (size <= 3)
         {
             cost = (user.type == 'T') ? 5 : (user.type == 'F') ? 5 : 4;
-            token1= token1+cost;//This is for R5
+            token1 = token1 + cost;//This is for R5
         }
         else if (user.type == 'T')
         {
@@ -326,15 +326,15 @@ void SelectAIService(string userID) {
 
         }
         else if (size > 3)
-    cost = (user.type == 'F') ? 8 : 7;
-         token1= token1+cost;//This is for R5
+            cost = (user.type == 'F') ? 8 : 7;
+        token1 = token1 + cost;//This is for R5
         break;
     }
 
     while (ser == 2) {
         cout << "What is the length of Audio (in mins): \n";
         cin >> size;
-        cout<< endl;
+        cout << endl;
         if (size <= 3) {
             cost = size * 2;
             token2 = token2 + cost;//This is for R5
@@ -351,7 +351,7 @@ void SelectAIService(string userID) {
         cin >> size;
         cout << endl;
         cost = size * 10;
-        token3 = token3+cost;//This is for R5
+        token3 = token3 + cost;//This is for R5
         break;
     }
     while (ser == 4) {
@@ -365,30 +365,33 @@ void SelectAIService(string userID) {
             num = size / 500 + 1;
         else
             num = size / 500;
-        cost =num;
-        token4 =token4+cost;//This is for R5
+        cost = num;
+        token4 = token4 + cost;//This is for R5
 
         break;
-    }if (ser = 1 && user.type == 'T' &&size>3 );
+    }if (ser = 1 && user.type == 'T' && size > 3);
     else if (balance >= cost) {
-
+        cout <<"Token Balance: "<< balance<<endl;
         cout << "Token remains: " << balance - cost << ", Successfully completed!\n\n";
     }
     else if (balance < cost && user.autoTopUp == 'Y' || user.autoTopUp == 'y')
     {
-        while (balance - cost < 0) { 
-            balance += 20; 
+        cout << "Token Balance: " << balance<<endl;
+        while (balance - cost < 0) {
+            balance += 20;
             user.tokenBalance += 20;
             money = money + 20;//This is for R5
             user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);//for R4.4
-            user.totalAmountPaid += 20;                   
+            user.totalAmountPaid += 20;
         }
-        cout <<"Token remains: " << balance - cost << ", Successfully completed!\n\n";
+        cout << "Token Balance After AutoTopUp: " << balance<<endl;
+        cout << "Token remains: " << balance - cost << ", Successfully completed!\n\n";
         user.transactions.emplace_back("Service 1", "Used AI Service", cost, 0);//for R4.4
     }
     else
     {
-        cout << "Balance not enought\n";
+        cout << "Balance not enought\n"<<balance<<endl;
+        cout << "You need" << cost << "Token"<<endl;
         user.tokenBalance = balance;
     }
     user.tokenBalance -= cost;
