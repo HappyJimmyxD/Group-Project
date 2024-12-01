@@ -395,6 +395,10 @@ void SelectAIService(string userID) {
 
         break;
     }
+    while (ser > 4 || ser < 1) {
+        displayInvalidMessage();
+        return;
+    }
       if (balance >= cost) {
         cout << "Token Balance: " << balance << endl;
         cout << "Token remains: " << balance - cost << ", Successfully completed!\n";
