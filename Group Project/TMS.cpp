@@ -44,7 +44,7 @@ int token3 = 0;
 int token4 = 0;
 int money = 0;
 
-vector<User> users(100);
+vector<User> users;
 bool isDataLoaded = false;
 
 
