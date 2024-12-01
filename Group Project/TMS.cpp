@@ -452,16 +452,26 @@ void EditProfile(string userID) {
             cin >> newAccountType;
             cs->type = newAccountType[0]; //replace
             cout << "Account Type updated successfully.\n";
+            
+            if (user.originalType != newAccountType) {    //R4.6
+        cout << "User type is changed from " << user.originalType << " to " << newAccountType << endl;//display the change of profile
+    }
+ cout << endl;
             return;
         }
         else if (choice == '2') {
-            cout << "Your current Auto Top-up setting" << user.autoTopUp;
+            cout << "Your current Auto Top-up setting: " << user.autoTopUp << endl;
             cout << "Enter new Auto Top-up setting (Y for Yes, N for No): ";
             char oldautoTopUp = cs->autoTopUp;//save old data for 4.6
             cin >> newAutoTopUp;
             if ((newAutoTopUp == 'Y') || (newAutoTopUp == 'N')) {
                 cs->autoTopUp = newAutoTopUp; //replace
                 cout << "Auto Top-up updated successfully.\n";
+                 
+               if (user.originalAutoTopUp != newAutoTopUp) {      //R4.6
+    cout << "Auto Top-up setting is changed from " << user.originalAutoTopUp << " to " << newAutoTopUp << endl;//display the change of profile
+}
+cout << endl;
                 return;
             }
             else {
