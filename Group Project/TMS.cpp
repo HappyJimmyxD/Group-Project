@@ -58,9 +58,8 @@ void enterUserView();
 void showSystemUsageSummary();
 void CreditsAndExit(int &);
 void PurchaseTokens(User& user);
-void EditProfile();
+void EditProfile(string userID);
 void ShowTransactionHistory(User& user);
-void ReturntoMainMenu();
 void display();
 void enterUserView();
 void SelectAIService(string userID);
@@ -276,7 +275,7 @@ void enterUserView() {
             switch (option) {
             case 1: SelectAIService(userID); break;
             case 2: PurchaseTokens(user); break;
-            case 3: EditProfile(); break;
+            case 3: EditProfile(userID); break;
             case 4: ShowTransactionHistory(user); break;
             case 5: return;
             default: displayInvalidMessage();
@@ -407,55 +406,56 @@ void PurchaseTokens(User& user) {
     cout << "Purchased " << tokens << " tokens for $" << amount << ". New balance: " << user.tokenBalance << "\n";
     cout << endl;
 }
-void EditProfile() {
+void EditProfile(string userID) {
     int fail = 0;
     char choice;
     string newAccountType;
     char newAutoTopUp;
-    string userID;
 
-    cout << "Enter User ID: ";
-    cin >> userID;
 
-  auto it = find_if(users.begin(), users.end(), [&](User& u) { return u.userID  == userID; });
+    auto cs = find_if(users.begin(), users.end(), [&](User& u) { return u.userID == userID; });
+    User& user = *cs;
 
-    if (it == users.end()) {
+    if (cs == users.end()) {
         cout << "User not found.\n";
         return;
     }
     do {
-        cout << "Do you want to make a change on ..." << endl << "Press 1: Your accout type" << "Press 2:Auto Top-up functiom" << endl;
+        cout << "Do you want to make a change on ..." << endl << "Press 1: Your accout type\n" << "Press 2:Auto Top-up functiom" << endl;
         cin >> choice;
 
-     if (choice == '1') {
-         cout << "Enter new Account Type: ";
-         char oldAccountType = it->type;//save old data for 4.6
-         cin >> newAccountType;
-         it->type = newAccountType[0]; //replace
-         cout << "Account Type updated successfully.\n";
-         return;
-     }
-     else if (choice == '2') {
-         cout << "Enter new Auto Top-up setting (Y for Yes, N for No): ";
-         char oldautoTopUp = it->autoTopUp;//save old data for 4.6
-         cin >> newAutoTopUp;
-         if ((newAutoTopUp == 'Y') || (newAutoTopUp == 'N')) {
-             it->autoTopUp = newAutoTopUp; //replace
-             cout << "Auto Top-up updated successfully.\n";
-             return;
-         }
-         else {
-             cout << "Invalid input. Please enter 'Y' or 'N'.\n";
-             fail++;
-         }
-     }
-     else {
-         cout << "Invalid choice. Please try again.\n";
-         fail++;
-     }
- } while (fail <= 2);
- if (fail == 3) {
-     cout << "Too many invalid attempts. Returning to User View Menu.\n";
+        if (choice == '1') {
+            cout << "Your current Account Type: " << user.type << endl;
+            cout << "Enter new Account Type: ";
+            char oldAccountType = cs->type;//save old data for 4.6
+            cin >> newAccountType;
+            cs->type = newAccountType[0]; //replace
+            cout << "Account Type updated successfully.\n";
+            return;
+        }
+        else if (choice == '2') {
+            cout << "Your current Auto Top-up setting" << user.autoTopUp;
+            cout << "Enter new Auto Top-up setting (Y for Yes, N for No): ";
+            char oldautoTopUp = cs->autoTopUp;//save old data for 4.6
+            cin >> newAutoTopUp;
+            if ((newAutoTopUp == 'Y') || (newAutoTopUp == 'N')) {
+                cs->autoTopUp = newAutoTopUp; //replace
+                cout << "Auto Top-up updated successfully.\n";
+                return;
+            }
+            else {
+                cout << "Invalid input. Please enter 'Y' or 'N'.\n";
+                fail++;
+            }
+        }
+        else {
+            cout << "Invalid choice. Please try again.\n";
+            fail++;
+        }
+    } while (fail <= 2);
+    if (fail == 3) {
+        cout << "Too many invalid attempts. Returning to User View Menu.\n";
+    }
 }
 void ShowTransactionHistory(User& user) {
     if (user.transactions.empty()) {
@@ -471,7 +471,6 @@ void ShowTransactionHistory(User& user) {
     }
     cout << "Total Amount Paid: $" << user.totalAmountPaid << "\n\n";
 }
-void ReturntoMainMenu() {}
 
 // R5
 void showSystemUsageSummary() {
