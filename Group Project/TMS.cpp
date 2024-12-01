@@ -503,7 +503,7 @@ void EditProfile(string userID) {
         }
     } while (fail <= 2);
     if (fail == 3) {
-        cout << "Too many invalid attempts. Returning to User View Menu.\n";
+        cout << "Too many invalid attempts. Returning to User View Menu.\n";
     }
 }
 void ShowTransactionHistory(User& user) {
