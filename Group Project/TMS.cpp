@@ -374,6 +374,7 @@ void SelectAIService(string userID) {
     {
         while (balance - cost < 0) { 
             balance += 20; 
+            user.tokenBalance += 20;
             money = money + 20;//This is for R5
             user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);//for R4.4
             user.totalAmountPaid += 20;                   
