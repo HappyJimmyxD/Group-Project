@@ -79,6 +79,11 @@ int main() {
         displayMainMenu();
         cin >> option;
 
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore();
+        }
+
         switch (option) {
         case 1: loadStartingData(); break;
         case 2: showUserRecords(); break;
