@@ -457,7 +457,7 @@ void EditProfile(string userID) {
             cout << "Invalid choice. Please try again.\n";
             fail++;
         }
-    } while (fail <= 2);
+    } while (fail < 2);
     if (fail == 3) {
         cout << "Too many invalid attempts. Returning to User View Menu.\n";
     }
