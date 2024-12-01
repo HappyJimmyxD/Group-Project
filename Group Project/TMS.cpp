@@ -430,7 +430,7 @@ void PurchaseTokens(User& user) {
 void EditProfile(string userID) {
     int fail = 0;
     char choice;
-    string newAccountType;
+    char newAccountType;
     char newAutoTopUp;
 
 
