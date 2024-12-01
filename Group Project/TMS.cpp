@@ -448,9 +448,8 @@ void EditProfile(string userID) {
         if (choice == '1') {
             cout << "Your current Account Type: " << user.type << endl;
             cout << "Enter new Account Type: ";
-            char oldAccountType = cs->type;//save old data for 4.6
             cin >> newAccountType;
-            cs->type = newAccountType[0]; //replace
+            cs->type = newAccountType ; //replace
             cout << "Account Type updated successfully.\n";
             
             if (user.originalType != newAccountType) {    //R4.6
@@ -462,7 +461,6 @@ void EditProfile(string userID) {
         else if (choice == '2') {
             cout << "Your current Auto Top-up setting: " << user.autoTopUp << endl;
             cout << "Enter new Auto Top-up setting (Y for Yes, N for No): ";
-            char oldautoTopUp = cs->autoTopUp;//save old data for 4.6
             cin >> newAutoTopUp;
             if ((newAutoTopUp == 'Y') || (newAutoTopUp == 'N')) {
                 cs->autoTopUp = newAutoTopUp; //replace
