@@ -296,7 +296,7 @@ void display() {
 
 }
 void SelectAIService(string userID) {
-    int ser, cost = 0, size, balance = 0;
+    int ser, cost = 0, size=0, balance = 0;
     auto cs = find_if(users.begin(), users.end(), [&](User& u) { return u.userID == userID; });
     User& user = *cs;
     balance = (user.tokenBalance);
@@ -351,7 +351,7 @@ void SelectAIService(string userID) {
         break;
     }
     while (ser == 4) {
-        int num;
+        int num=0;
         cout << "What is the length of text for NLP: \n";
         cin >> size;
         cout << endl;
