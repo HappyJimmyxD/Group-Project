@@ -417,7 +417,7 @@ void EditProfile() {
     cout << "Enter User ID: ";
     cin >> userID;
 
-    auto it = find_if(users.begin(), users.end(), [&](User& u) { return u.userID == userID; });
+  auto it = find_if(users.begin(), users.end(), [&](User& u) { return u.userID  == userID; });
 
     if (it == users.end()) {
         cout << "User not found.\n";
@@ -427,38 +427,37 @@ void EditProfile() {
         cout << "Do you want to make a change on ..." << endl << "Press 1: Your accout type" << "Press 2:Auto Top-up functiom" << endl;
         cin >> choice;
 
-        if (choice == '1') {
-            cout << "Enter new Account Type: ";
-            char oldAccountType = it->type;//save old data for 4.6
-            cin >> newAccountType;
-            it->type = newAccountType[0]; //replace
-            cout << "Account Type updated successfully.\n";
-            return;
-        }
-        else if (choice == '2') {
-            cout << "Enter new Auto Top-up setting (Y for Yes, N for No): ";
-            char oldautoTopUp = it->autoTopUp;//save old data for 4.6
-            cin >> newAutoTopUp;
-            if ((newAutoTopUp == 'Y') || (newAutoTopUp == 'N')) {
-                it->autoTopUp = newAutoTopUp; //replace
-                cout << "Auto Top-up updated successfully.\n";
-                return;
-            }
-            else {
-                cout << "Invalid input. Please enter 'Y' or 'N'.\n";
-                fail++;
-            }
-        }
-        else {
-            cout << "Invalid choice. Please try again.\n";
-            fail++;
-        }
-    } while (fail <= 2);
-    if (fail == 3) {
-        cout << "Too many invalid attempts. Returning to User View Menu.\n";
-    }
+     if (choice == '1') {
+         cout << "Enter new Account Type: ";
+         char oldAccountType = it->type;//save old data for 4.6
+         cin >> newAccountType;
+         it->type = newAccountType[0]; //replace
+         cout << "Account Type updated successfully.\n";
+         return;
+     }
+     else if (choice == '2') {
+         cout << "Enter new Auto Top-up setting (Y for Yes, N for No): ";
+         char oldautoTopUp = it->autoTopUp;//save old data for 4.6
+         cin >> newAutoTopUp;
+         if ((newAutoTopUp == 'Y') || (newAutoTopUp == 'N')) {
+             it->autoTopUp = newAutoTopUp; //replace
+             cout << "Auto Top-up updated successfully.\n";
+             return;
+         }
+         else {
+             cout << "Invalid input. Please enter 'Y' or 'N'.\n";
+             fail++;
+         }
+     }
+     else {
+         cout << "Invalid choice. Please try again.\n";
+         fail++;
+     }
+ } while (fail <= 2);
+ if (fail == 3) {
+     cout << "Too many invalid attempts. Returning to User View Menu.\n";
 }
- void ShowTransactionHistory(User & user) {
+void ShowTransactionHistory(User& user) {
     if (user.transactions.empty()) {
         cout << "No transactions made so far.\n";
         return;
