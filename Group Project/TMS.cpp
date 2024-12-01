@@ -294,6 +294,12 @@ void enterUserView() {
         display();
         int option;
         cin >> option;
+
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore();
+        }
+
         cout << endl;
         switch (option) {
         case 1: SelectAIService(userID); break;
