@@ -531,6 +531,7 @@ void CreditsAndExit(int &num) {
         }
         else {
             cout << "Invalid input. Please enter 'y' or 'n'." << endl;
+            return;
         }
     }
 }
