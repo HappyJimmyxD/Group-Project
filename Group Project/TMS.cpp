@@ -456,7 +456,7 @@ void EditProfile(string userID) {
         return;
     }
     do {
-        cout << "Do you want to make a change on ..." << endl << "Press 1: Your accout type\n" << "Press 2:Auto Top-up functiom" << endl;
+        cout << "Do you want to make a change on ..." << endl << "Press 1: Your accout type\n" << "Press 2: Auto Top-up functiom" << endl;
         cin >> choice;
 
         if (choice == '1') {
