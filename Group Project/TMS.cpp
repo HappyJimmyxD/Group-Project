@@ -319,7 +319,7 @@ void display() {
     cout << "[3] Edit Profile\n";
     cout << "[4] Show Transaction History\n";
     cout << "[5] Return to Main Menu\n";
-    cout << "**************************" << endl << " Option(1 - 5) :";
+    cout << "**************************" << endl << "Option(1 - 5) :";
 
 }
 void SelectAIService(string userID) {
@@ -332,6 +332,7 @@ void SelectAIService(string userID) {
     cout << "2.Speech-to-text transcription\n";
     cout << "3.Predictive Analysis" << endl;
     cout << "4.Natural Language Processing (NLP) \n";
+    cout << "**************************\n";
     cout << "Choose a service (1-4): " << endl;
     cin >> ser;
     while (ser == 1) {
@@ -410,7 +411,7 @@ void SelectAIService(string userID) {
             user.transactions.emplace_back("Auto Top-up", "Purchased extra tokens", 20, 40);//for R4.4
             user.totalAmountPaid += 40;
         }
-        cout << "Token Balance After AutoTopUp: " << balance << endl;
+        cout << "Original Token Balance After AutoTopUp: " << balance << endl;
         cout << "Token remains: " << balance - cost << ", Successfully completed!\n\n";
         user.tokenBalance -= cost;
         user.transactions.emplace_back("Service 1", "Used AI Service", cost, 0);//for R4.4
