@@ -395,7 +395,7 @@ void SelectAIService(string userID) {
         displayInvalidMessage();
         return;
     }
-    if (balance >= cost) {
+      if (balance >= cost) {
         cout << "Token Balance: " << balance << endl;
         cout << "Token remains: " << balance - cost << ", Successfully completed!\n";
         user.tokenBalance -= cost;
