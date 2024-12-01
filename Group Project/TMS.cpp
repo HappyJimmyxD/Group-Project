@@ -27,6 +27,9 @@ public:
     char type{};
     int tokenBalance{};
     char autoTopUp{};
+    char originalType{};
+    int originalTokenBalance{};
+    char originalAutoTopUp{};
     double totalAmountPaid = 0;
     vector<Transaction> transactions; 
 
@@ -35,6 +38,9 @@ public:
         type = t;
         tokenBalance = balance;
         autoTopUp = topUp;
+        originalType = t;
+        originalTokenBalance = balance;
+        originalAutoTopUp = topUp;
     }
 };
 
@@ -411,6 +417,7 @@ void PurchaseTokens(User& user) {
     user.tokenBalance += tokens;
     user.totalAmountPaid += amount;
     user.transactions.emplace_back("Purchase", "Purchased tokens", tokens, amount);
+    cout << "Original balance: " << user.originalTokenBalance << endl;
     cout << "Purchased " << tokens << " tokens for $" << amount << ". New balance: " << user.tokenBalance << "\n";
     cout << endl;
 }
