@@ -463,14 +463,20 @@ void EditProfile(string userID) {
             cout << "Your current Account Type: " << user.type << endl;
             cout << "Enter new Account Type: ";
             cin >> newAccountType;
-            cs->type = newAccountType; //replace
-            cout << "Account Type updated successfully.\n";
+            if ((newAccountType == 'T') || (newAccountType == 'F') || (newAccountType == 'S')) {
+                cs->type = newAccountType; //replace
+                cout << "Account Type updated successfully.\n";
 
-            if (user.originalType != newAccountType) {    //R4.6
-                cout << "User type is changed from " << user.originalType << " to " << newAccountType << endl;//display the change of profile
+                if (user.originalType != newAccountType) {    //R4.6
+                    cout << "User type is changed from " << user.originalType << " to " << newAccountType << endl;//display the change of profile
+                }
+                cout << endl;
+                return;
             }
-            cout << endl;
-            return;
+            else {
+                    cout << "Invalid input. Please enter 'T' or 'F' or 'S'.\n\n";
+                    fail++;
+            }
         }
         else if (choice == '2') {
             cout << "Your current Auto Top-up setting: " << user.autoTopUp << endl;
@@ -487,7 +493,7 @@ void EditProfile(string userID) {
                 return;
             }
             else {
-                cout << "Invalid input. Please enter 'Y' or 'N'.\n";
+                cout << "Invalid input. Please enter 'Y' or 'N'.\n\n";
                 fail++;
             }
         }
@@ -495,7 +501,7 @@ void EditProfile(string userID) {
             cout << "Invalid choice. Please try again.\n";
             fail++;
         }
-    } while (fail < 2);
+    } while (fail <= 2);
     if (fail == 3) {
         cout << "Too many invalid attempts. Returning to User View Menu.\n";
     }
